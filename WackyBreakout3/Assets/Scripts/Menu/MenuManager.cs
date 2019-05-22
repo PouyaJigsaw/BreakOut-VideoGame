@@ -3,23 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public static class Menu
+public static class MenuManager
 {
     public static void GoToMenu(MenuName name)
     {
 
-        /*switch(name)
+        switch(name)
             {
-                case MenuName.Pause:
-                    SceneManager.LoadScene("MainMenu");
-                    break;
                 case MenuName.Menu:
-                    SceneManager.LoadScene();
+                    SceneManager.LoadScene("Menu");
+                    break;
+                case MenuName.Pause:
+                Object.Instantiate(Resources.Load("PauseMenu"));
+                break;
 
             };
 
-        }
-        */
+        
+        
     }
 
 }
