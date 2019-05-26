@@ -25,6 +25,7 @@ public class HUD : MonoBehaviour
         scoreText.text = "Score: " + score.ToString();
         ballsLeftText.text = "Balls Left: " + ballsLeft.ToString();
         EventManager.AddPointsAddedEventListener(AddPoints);
+        EventManager.AddUpdateBallsLeftListener(UpdateBallsLeft);
     }
 
     public static void UpdateBallsLeft()

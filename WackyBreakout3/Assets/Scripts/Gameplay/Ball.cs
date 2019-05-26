@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.Events;
 
 public class Ball : MonoBehaviour
 {
@@ -19,11 +20,13 @@ public class Ball : MonoBehaviour
     Vector2 colliderLowerLeft;
     Vector2 colliderUpperRight;
     bool  isSpeedUp = false;
+
+    UpdateBallsLeftEvent updateBallsLeftEvent;
     // Start is called before the first frame update
     void Start()
     {
 
-
+        updateBallsLeftEvent = new UpdateBallsLeftEvent();
         rb2d = GetComponent<Rigidbody2D>();
 
         ballSpawner = Camera.main.GetComponent<BallSpawner>();
@@ -39,8 +42,8 @@ public class Ball : MonoBehaviour
         speedUpTimer = gameObject.AddComponent<Timer>();
 
         EventManager.AddSpeedUpListener(SpeedUpTheBall);
-        
-       
+
+        EventManager.AddUpdateBallsLeftInvoker(this);
 
     }
 
@@ -70,7 +73,7 @@ public class Ball : MonoBehaviour
             if (HUD.ballsLeft > 0)
             {
                 ballSpawner.SpawnABall();
-                HUD.UpdateBallsLeft();
+                updateBallsLeftEvent.Invoke();
                 addForceTimer.Run();
             }
           
@@ -143,7 +146,7 @@ public class Ball : MonoBehaviour
             if (HUD.ballsLeft > 0)
             {
                 ballSpawner.SpawnABall();
-                HUD.UpdateBallsLeft();
+                updateBallsLeftEvent.Invoke();
                 RestoreForceTimer();
             }
 
@@ -151,5 +154,8 @@ public class Ball : MonoBehaviour
     }
 
 
-    
+    public void AddUpdateBallsLeftListener(UnityAction listener)
+    {
+        updateBallsLeftEvent.AddListener(listener);
+    }
 }

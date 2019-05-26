@@ -96,4 +96,33 @@ public static class EventManager
 
     }
     #endregion
+
+
+    #region Update Balls Left Event
+
+    static List<Ball> updateBallsLeftInvokerList = new List<Ball>();
+    static UnityAction updateBallsLeftListener;
+
+    public static void AddUpdateBallsLeftInvoker(Ball invoker)
+    {
+        updateBallsLeftInvokerList.Add(invoker);
+
+        if (updateBallsLeftListener != null)
+            invoker.AddUpdateBallsLeftListener(updateBallsLeftListener);
+
+    }
+
+    public static void AddUpdateBallsLeftListener(UnityAction listener)
+    {
+        updateBallsLeftListener = listener;
+
+        foreach(Ball updateBallsLeftInvoker in updateBallsLeftInvokerList)
+        {
+            updateBallsLeftInvoker.AddUpdateBallsLeftListener(listener);
+        }
+    }
+
+    
+    
+    #endregion 
 }
