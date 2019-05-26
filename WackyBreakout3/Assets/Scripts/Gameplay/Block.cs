@@ -1,16 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Block : MonoBehaviour
 {
 
     protected float blockValue;
-
+    PointsAddedEvent pointsAddedEvent;
     // Start is called before the first frame update
-    void Start()
+    virtual protected void Start()
     {
-        
+        pointsAddedEvent = new PointsAddedEvent();
+        EventManager.AddPointsAddedEventInvoker(this);
     }
 
     // Update is called once per frame
@@ -22,6 +24,12 @@ public class Block : MonoBehaviour
     virtual protected void  OnCollisionEnter2D(Collision2D collision)
     {
         Destroy(gameObject);
-        HUD.AddPoints(blockValue);
+        pointsAddedEvent.Invoke((int)blockValue);
+    }
+
+
+    public void AddPointsAddedListener(UnityAction<float> listener)
+    {
+        pointsAddedEvent.AddListener(listener);
     }
 }

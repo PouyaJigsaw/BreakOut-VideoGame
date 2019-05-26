@@ -66,7 +66,34 @@ public static class EventManager
         }
     }
 
-    
 
-#endregion
+
+    #endregion
+
+
+    #region Points Added Event
+    static Block pointsAddedInvoker = new Block();
+    static List<UnityAction<float>> pointsAddedListenerList = new List<UnityAction<float>>();
+    
+    public static void  AddPointsAddedEventListener(UnityAction<float> listener)
+    {
+        pointsAddedListenerList.Add(listener);
+        
+        if( pointsAddedInvoker != null)
+        {
+            pointsAddedInvoker.AddPointsAddedListener(listener);
+        }
+    }
+
+    public static void AddPointsAddedEventInvoker(Block invoker)
+    {
+        pointsAddedInvoker = invoker;
+
+        foreach(UnityAction<float> pointsAddedListener in pointsAddedListenerList)
+        {
+            pointsAddedInvoker.AddPointsAddedListener(pointsAddedListener);
+        }
+
+    }
+    #endregion
 }

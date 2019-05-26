@@ -18,8 +18,9 @@ using Random = UnityEngine.Random;
 
     Sprite toBeBlock;
 
-        private void Start()
+        override protected void Start()
         {
+        base.Start();
             blockValue = ConfigurationUtils.StandardBlockPoints;
 
             int randomNum = Random.Range(0, 3);

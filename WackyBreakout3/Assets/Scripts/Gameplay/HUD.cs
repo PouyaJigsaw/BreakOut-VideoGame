@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 public class HUD : MonoBehaviour
 {
@@ -14,13 +15,16 @@ public class HUD : MonoBehaviour
     
     static float score = 0;
     public static float ballsLeft = 5;
+
+
+   
     
     // Start is called before the first frame update
     void Start()
     {
         scoreText.text = "Score: " + score.ToString();
         ballsLeftText.text = "Balls Left: " + ballsLeft.ToString();
-
+        EventManager.AddPointsAddedEventListener(AddPoints);
     }
 
     public static void UpdateBallsLeft()
@@ -28,7 +32,7 @@ public class HUD : MonoBehaviour
         ballsLeft--;
     }
 
-    public static void AddPoints(float value)
+     void AddPoints(float value)
     {
         score += value;
         
@@ -42,4 +46,8 @@ public class HUD : MonoBehaviour
 
 
     }
+
+
+
+
 }

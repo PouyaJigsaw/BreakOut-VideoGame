@@ -54,8 +54,9 @@ public class PickUpBlock : Block
 
     }
     // Start is called before the first frame update
-    void Start()
+    override protected void Start()
     {
+        base.Start();
         blockValue = ConfigurationUtils.PickUpBlockPoints;
 
         SpriteRenderer sr = GetComponent<SpriteRenderer>();

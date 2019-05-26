@@ -11,8 +11,9 @@ public class BonusBlock : Block
 {
     
     
-    void Start()
+    override protected void Start()
     {
+        base.Start();
         blockValue = ConfigurationUtils.BonusBlockPoints;
         
     }

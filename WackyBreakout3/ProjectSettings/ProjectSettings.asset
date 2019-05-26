@@ -587,9 +587,9 @@ PlayerSettings:
   facebookXfbml: 0
   facebookFrictionlessRequests: 1
   apiCompatibilityLevel: 6
-  cloudProjectId: dd2ea622-4a86-403f-a064-9b93661f0417
+  cloudProjectId: 254bb715-66ea-49d3-ab3a-f0f01bfe4f43
   framebufferDepthMemorylessMode: 0
-  projectName: WackyBreakout
+  projectName: WackyBreakout (1)
   organizationId: pouya_jigsaw
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
