@@ -45,6 +45,12 @@ public class Ball : MonoBehaviour
 
         EventManager.AddUpdateBallsLeftInvoker(this);
 
+        addForceTimer.AddTimerFinishedEventListener(AddForceToBall);
+        addForceTimer.AddTimerFinishedEventListener(RestoreForceTimer);
+
+        ballDeathTimer.AddTimerFinishedEventListener(KillTheBallAndSpawn);
+
+        speedUpTimer.AddTimerFinishedEventListener(SpeedModeIsFinished);
     }
 
     
@@ -54,40 +60,7 @@ public class Ball : MonoBehaviour
 
         rb2d.velocity =  direction * rb2d.velocity.magnitude;
     }
-    // Update is called once per frame
-    void Update()
-    {
-        if (addForceTimer.Finished)
-        {
-                AddForceToBall();
-                RestoreForceTimer();
-        }
 
-        Debug.Log(rb2d.velocity);
-
-        
-        if(ballDeathTimer.Finished)
-        {
-            Destroy(gameObject);
-            deadInScreen = true;
-            if (HUD.ballsLeft > 0)
-            {
-                ballSpawner.SpawnABall();
-                updateBallsLeftEvent.Invoke();
-                addForceTimer.Run();
-            }
-          
-        }
-
-        if(speedUpTimer.Finished)
-        {
-            isSpeedUp = false;
-            speedUpTimer.ResetTimer();
-            rb2d.velocity /= ConfigurationUtils.SpeedUpFactor;
-        }
-
-       
-    }
 
     void AddForceToBall()
     {
@@ -107,6 +80,26 @@ public class Ball : MonoBehaviour
         else
         {
             rb2d.AddForce(vectorForce * ConfigurationUtils.BallImpulseForce);
+        }
+    }
+
+    void SpeedModeIsFinished()
+    {
+        isSpeedUp = false;
+        speedUpTimer.ResetTimer();
+        rb2d.velocity /= ConfigurationUtils.SpeedUpFactor;
+    }
+
+    void KillTheBallAndSpawn()
+    {
+        Destroy(gameObject);
+        deadInScreen = true;
+        if (HUD.ballsLeft > 0)
+        {
+            //spawnBallEvent.Invoke()
+            ballSpawner.SpawnABall();
+            updateBallsLeftEvent.Invoke();
+            addForceTimer.Run();
         }
     }
 
@@ -145,6 +138,7 @@ public class Ball : MonoBehaviour
             Destroy(gameObject);
             if (HUD.ballsLeft > 0)
             {
+                //SpawnBallEvent.Invoke()
                 ballSpawner.SpawnABall();
                 updateBallsLeftEvent.Invoke();
                 RestoreForceTimer();

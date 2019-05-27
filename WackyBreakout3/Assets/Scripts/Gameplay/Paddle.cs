@@ -22,6 +22,8 @@ public class Paddle : MonoBehaviour
         freezeTimer = gameObject.AddComponent<Timer>();
 
         EventManager.AddFreezerListener(freezeThePaddle);
+
+        freezeTimer.AddTimerFinishedEventListener(FreezeModeFinished);
     }
 
     // Update is called once per frame
@@ -59,19 +61,17 @@ public class Paddle : MonoBehaviour
 
     private void Update()
     {
-        if(freezeTimer.Finished)
-        {
-            isFrozen = false;
-            freezeTimer.ResetTimer();
-
-        }
-
-        Debug.Log("Speeeed UP? " + EffectUtils.IsSpeedUp + "*** Time Remains: " + EffectUtils.speedUpTimerRemain);
+       
+       
         
         
     }
 
-
+    void FreezeModeFinished()
+    {
+        isFrozen = false;
+        freezeTimer.ResetTimer();
+    }
     /// <summary>
     /// Detects collision with a ball to aim the ball
     /// </summary>

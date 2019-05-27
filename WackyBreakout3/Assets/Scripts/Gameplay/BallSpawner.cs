@@ -28,30 +28,23 @@ public class BallSpawner : MonoBehaviour
         colliderUpperRight = (Vector2)transform.position + new Vector2(boxCol2D.size.x/2, boxCol2D.size.y/2);
         Destroy(ballTemp);
 
-       
 
-        spawnSeconds = gameObject.AddComponent<Timer>();
-        spawnSeconds.Duration = Random.Range(ConfigurationUtils.MinSpawnSecond,ConfigurationUtils.MaxSpawnSecond);
-        spawnSeconds.Run();
-        
-        
+
+
+        SpawnBallAndResetTimer();
+        spawnSeconds.AddTimerFinishedEventListener(SpawnBallAndResetTimer);
     }
     
 
-    private void Update()
+    void SpawnBallAndResetTimer()
     {
-       if(spawnSeconds.Finished || firstTime) // check that || shit
+        if (HUD.ballsLeft > 0)
         {
-            if (HUD.ballsLeft > 0)
-            {
-                SpawnABall();
-                spawnSeconds.Duration = Random.Range(ConfigurationUtils.MinSpawnSecond, ConfigurationUtils.MaxSpawnSecond);
-                spawnSeconds.Run();
-                firstTime = false;
-            }
+            SpawnABall();
+            spawnSeconds.Duration = Random.Range(ConfigurationUtils.MinSpawnSecond, ConfigurationUtils.MaxSpawnSecond);
+            spawnSeconds.Run();
+           
         }
-
-       
     }
 
 

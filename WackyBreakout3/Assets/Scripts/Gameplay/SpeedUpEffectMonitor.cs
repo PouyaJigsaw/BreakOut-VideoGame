@@ -34,16 +34,16 @@ public class SpeedUpEffectMonitor : MonoBehaviour
 
 
         EventManager.AddSpeedUpListener(Initialize);
-       
+
+        speedUpTimerMonitor.AddTimerFinishedEventListener(ResetSpeedUpMonitor);
     }
 
-    private void Update()
+
+
+    void ResetSpeedUpMonitor()
     {
-        if(speedUpTimerMonitor.Finished)
-        {
-            isSpeedUpMonitor = false;
-            speedUpTimerMonitor.ResetTimer();
-        }
+        isSpeedUpMonitor = false;
+        speedUpTimerMonitor.ResetTimer();
     }
 
     void Initialize(float speedUpDuration, float speedUpFactor)
