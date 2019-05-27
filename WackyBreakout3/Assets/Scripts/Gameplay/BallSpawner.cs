@@ -28,9 +28,9 @@ public class BallSpawner : MonoBehaviour
         colliderUpperRight = (Vector2)transform.position + new Vector2(boxCol2D.size.x/2, boxCol2D.size.y/2);
         Destroy(ballTemp);
 
+        EventManager.AddBallDiesListener(SpawnABall);
 
-
-
+        spawnSeconds = gameObject.AddComponent<Timer>();
         SpawnBallAndResetTimer();
         spawnSeconds.AddTimerFinishedEventListener(SpawnBallAndResetTimer);
     }
@@ -48,7 +48,7 @@ public class BallSpawner : MonoBehaviour
     }
 
 
-    public void SpawnABall()
+    private void SpawnABall()
     {
 
              

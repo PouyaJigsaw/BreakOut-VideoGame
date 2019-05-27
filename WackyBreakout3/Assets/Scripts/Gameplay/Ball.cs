@@ -22,11 +22,13 @@ public class Ball : MonoBehaviour
     bool  isSpeedUp = false;
 
     UpdateBallsLeftEvent updateBallsLeftEvent;
+    BallDiesEvent ballDiesEvent;
     // Start is called before the first frame update
     void Start()
     {
 
         updateBallsLeftEvent = new UpdateBallsLeftEvent();
+        ballDiesEvent = new BallDiesEvent();
         rb2d = GetComponent<Rigidbody2D>();
 
         ballSpawner = Camera.main.GetComponent<BallSpawner>();
@@ -44,6 +46,8 @@ public class Ball : MonoBehaviour
         EventManager.AddSpeedUpListener(SpeedUpTheBall);
 
         EventManager.AddUpdateBallsLeftInvoker(this);
+
+        EventManager.AddBallDiesInvoker(this);
 
         addForceTimer.AddTimerFinishedEventListener(AddForceToBall);
         addForceTimer.AddTimerFinishedEventListener(RestoreForceTimer);
@@ -96,9 +100,9 @@ public class Ball : MonoBehaviour
         deadInScreen = true;
         if (HUD.ballsLeft > 0)
         {
-            //spawnBallEvent.Invoke()
-            ballSpawner.SpawnABall();
-            updateBallsLeftEvent.Invoke();
+            ballDiesEvent.Invoke();
+            
+            
             addForceTimer.Run();
         }
     }
@@ -138,8 +142,8 @@ public class Ball : MonoBehaviour
             Destroy(gameObject);
             if (HUD.ballsLeft > 0)
             {
-                //SpawnBallEvent.Invoke()
-                ballSpawner.SpawnABall();
+                ballDiesEvent.Invoke();
+                
                 updateBallsLeftEvent.Invoke();
                 RestoreForceTimer();
             }
@@ -148,6 +152,10 @@ public class Ball : MonoBehaviour
     }
 
 
+    public void AddBallDiesListener(UnityAction listener)
+    {
+        ballDiesEvent.AddListener(listener);
+    }
     public void AddUpdateBallsLeftListener(UnityAction listener)
     {
         updateBallsLeftEvent.AddListener(listener);

@@ -122,7 +122,40 @@ public static class EventManager
         }
     }
 
-    
-    
-    #endregion 
+
+
+    #endregion
+
+
+    #region Ball Dies Event
+
+    static List<Ball> ballDiesInvokerList = new List<Ball>();
+    static UnityAction ballDiesListener;
+
+
+    public static void AddBallDiesInvoker(Ball invoker)
+    {
+        ballDiesInvokerList.Add(invoker);
+        
+        if(ballDiesListener != null)
+        {
+            invoker.AddUpdateBallsLeftListener(ballDiesListener);
+        }
+    }
+
+
+    public static void AddBallDiesListener(UnityAction listener)
+    {
+        ballDiesListener = listener;
+
+        foreach(Ball ballDiesInvoker in ballDiesInvokerList)
+        {
+            ballDiesInvoker.AddBallDiesListener(ballDiesListener);
+        }
+    }
+
+
+    #endregion
+
+
 }
