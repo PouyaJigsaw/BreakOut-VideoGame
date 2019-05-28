@@ -159,8 +159,8 @@ public class ConfigurationData
 
     void ConfigurationDataFields(string[] csvValues)
     {
-        ConfigurationData.paddleMoveUnitsPerSecond = float.Parse(csvValues[0]);
-        ConfigurationData.ballImpulseForce = float.Parse(csvValues[1]);
+        //ConfigurationData.paddleMoveUnitsPerSecond = float.Parse(csvValues[0]);
+        //ConfigurationData.ballImpulseForce = float.Parse(csvValues[1]);
         //ConfigurationData.ballLifeTime = float.Parse(csvValues[2]);
         //ConfigurationData.minSpawnSecond = float.Parse(csvValues[3]);
         //ConfigurationData.maxSpawnSecond = float.Parse(csvValues[4]);

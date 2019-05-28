@@ -157,5 +157,32 @@ public static class EventManager
 
     #endregion
 
+    #region  Last Ball Dies Event
+
+    static HUD lastBallInvoker;
+    static UnityAction lastBallListener;
+
+
+    public static void AddLastBallInvoker(HUD invoker)
+    {
+        lastBallInvoker = invoker;
+
+        if(lastBallListener != null)
+        {
+            lastBallInvoker.AddLastBallEventListener(lastBallListener);
+        }
+    }
+
+
+    public static void AddLastBallListener(UnityAction listener)
+    {
+        lastBallListener = listener;
+
+        if(lastBallInvoker != null)
+        {
+            lastBallInvoker.AddLastBallEventListener(listener);
+        }
+    }
+    #endregion
 
 }

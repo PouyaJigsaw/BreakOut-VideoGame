@@ -13,10 +13,23 @@ public class HUD : MonoBehaviour
     [SerializeField]
     Text ballsLeftText;
     
-    static float score = 0;
-    public static float ballsLeft = 5;
+     static float score = 0;
+     public  static float ballsLeft = 5;
+
+    bool gameOver = false;
+
+    LastBallDestroyedEvent lastBallDestroyed;
+    public static float Score
+    {
+        get
+        {
+            return score;
+        }
 
 
+    }
+
+   
    
     
     // Start is called before the first frame update
@@ -25,12 +38,17 @@ public class HUD : MonoBehaviour
         scoreText.text = "Score: " + score.ToString();
         ballsLeftText.text = "Balls Left: " + ballsLeft.ToString();
         EventManager.AddPointsAddedEventListener(AddPoints);
-        EventManager.AddUpdateBallsLeftListener(UpdateBallsLeft);
+        EventManager.AddUpdateBallsLeftListener(UpdateBallsLeft);    
+        
+        lastBallDestroyed = new LastBallDestroyedEvent();
+        EventManager.AddLastBallInvoker(this);
+        EventManager.AddLastBallListener(ShowGameOverMessage);
     }
 
     public static void UpdateBallsLeft()
     {
         ballsLeft--;
+        
     }
 
      void AddPoints(float value)
@@ -45,10 +63,25 @@ public class HUD : MonoBehaviour
           scoreText.text = "Score: " + score.ToString();
           ballsLeftText.text = "Balls Left: " + ballsLeft.ToString();
 
+        if(!gameOver && ballsLeft == 0)
+        {
+            lastBallDestroyed.Invoke();
+            gameOver = true;
+        }
 
     }
 
 
+    void ShowGameOverMessage()
+    {
+        Time.timeScale = 0;
+        Object.Instantiate(Resources.Load("GameOverMenu"));
+    }
 
+
+    public void AddLastBallEventListener(UnityAction listener)
+    {
+        lastBallDestroyed.AddListener(listener);
+    }
 
 }
