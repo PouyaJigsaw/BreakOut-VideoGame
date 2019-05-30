@@ -23,6 +23,7 @@ public class Block : MonoBehaviour
 
     virtual protected void  OnCollisionEnter2D(Collision2D collision)
     {
+        AudioManager.Play(AudioClipName.BlockDestroy);
         Destroy(gameObject);
         pointsAddedEvent.Invoke(blockValue);
     }

@@ -71,6 +71,7 @@ public class HUD : MonoBehaviour
         if(!gameOver && ballsLeft == 0)
         {
             lastBallDestroyed.Invoke();
+            AudioManager.Play(AudioClipName.GameOver);
             gameOver = true;
         }
 

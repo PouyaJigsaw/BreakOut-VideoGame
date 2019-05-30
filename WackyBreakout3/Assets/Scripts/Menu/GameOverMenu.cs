@@ -18,6 +18,7 @@ public class GameOverMenu : MonoBehaviour
 
     public void HandleQuitButtonOnClickEvent()
     {
+        AudioManager.Play(AudioClipName.ButtonClick);
         Time.timeScale = 1;
         Destroy(gameObject);
         MenuManager.GoToMenu(MenuName.Menu);

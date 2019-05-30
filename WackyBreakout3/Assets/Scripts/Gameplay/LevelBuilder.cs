@@ -58,7 +58,7 @@ public class LevelBuilder : MonoBehaviour
         {
             Instantiate(RandomBlock(), new Vector2(rowX, firstRowY), Quaternion.identity);
             Instantiate(RandomBlock(), new Vector2(rowX, secondRowY), Quaternion.identity);
-            Instantiate(RandomBlock(), new Vector2(rowX, thirdRowY), Quaternion.identity);
+           
 
             rowX += blockWidth;
         }

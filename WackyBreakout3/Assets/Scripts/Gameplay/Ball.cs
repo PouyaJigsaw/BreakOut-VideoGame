@@ -76,6 +76,7 @@ public class Ball : MonoBehaviour
        
         if (EffectUtils.IsSpeedUp)
         {
+            AudioManager.Play(AudioClipName.BallDown);
             rb2d.AddForce(vectorForce * ConfigurationUtils.BallImpulseForce * ConfigurationUtils.SpeedUpFactor);          
             //duration timer bayad baghimunde timer bashe
             speedUpTimer.Duration = EffectUtils.speedUpTimerRemain;
@@ -83,6 +84,7 @@ public class Ball : MonoBehaviour
         }
         else
         {
+            AudioManager.Play(AudioClipName.BallDown);
             rb2d.AddForce(vectorForce * ConfigurationUtils.BallImpulseForce);
         }
     }

@@ -13,12 +13,14 @@ public class PauseMenu : MonoBehaviour
 
     public void HandleResumeOnClickEvent()
     {
+        AudioManager.Play(AudioClipName.ButtonClick);
         Time.timeScale = 1;
         Destroy(gameObject);
     }
 
     public void HandleQuitOnClickEvent()
     {
+        AudioManager.Play(AudioClipName.ButtonClick);
         Time.timeScale = 1;
         Destroy(gameObject);
         MenuManager.GoToMenu(MenuName.Menu);

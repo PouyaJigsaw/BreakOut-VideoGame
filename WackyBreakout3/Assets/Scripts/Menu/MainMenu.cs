@@ -7,12 +7,14 @@ public class MainMenu : MonoBehaviour
 {
 
     public void HandlePlayButtonOnClickEvent()
-    { 
+    {
+        AudioManager.Play(AudioClipName.ButtonClick);
         SceneManager.LoadScene("Gameplay");
     }
 
     public void HandleQuitButtonOnClickEvent()
     {
+        AudioManager.Play(AudioClipName.ButtonClick);
         Application.Quit();
     }
 
