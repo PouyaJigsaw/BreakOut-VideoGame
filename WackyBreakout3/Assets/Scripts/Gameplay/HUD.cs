@@ -26,6 +26,11 @@ public class HUD : MonoBehaviour
             return score;
         }
 
+        set
+        {
+            score = value;
+        }
+
 
     }
 
@@ -83,5 +88,7 @@ public class HUD : MonoBehaviour
     {
         lastBallDestroyed.AddListener(listener);
     }
+
+
 
 }

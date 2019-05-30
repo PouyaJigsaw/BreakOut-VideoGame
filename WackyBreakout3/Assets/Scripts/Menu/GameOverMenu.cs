@@ -11,12 +11,17 @@ public class GameOverMenu : MonoBehaviour
 
     private void Start()
     {
+     
+        Time.timeScale = 0;
         highScoreText.text = "Score: " + HUD.Score;
     }
 
     public void HandleQuitButtonOnClickEvent()
     {
-        Time.timeScale = 1;      
+        Time.timeScale = 1;
+        Destroy(gameObject);
         MenuManager.GoToMenu(MenuName.Menu);
     }
+
+
 }

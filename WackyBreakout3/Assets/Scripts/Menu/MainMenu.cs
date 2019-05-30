@@ -7,7 +7,7 @@ public class MainMenu : MonoBehaviour
 {
 
     public void HandlePlayButtonOnClickEvent()
-    {
+    { 
         SceneManager.LoadScene("Gameplay");
     }
 

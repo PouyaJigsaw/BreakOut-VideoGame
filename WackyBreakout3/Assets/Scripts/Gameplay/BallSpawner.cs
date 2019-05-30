@@ -21,7 +21,8 @@ public class BallSpawner : MonoBehaviour
    
     private void Start()
     {
-        
+        HUD.Score = 0;
+        HUD.ballsLeft = 5;
         GameObject ballTemp = Instantiate(ball, Vector3.zero, Quaternion.identity);
         boxCol2D = ballTemp.GetComponent<BoxCollider2D>();
         colliderLowerLeft = (Vector2)transform.position - new Vector2(boxCol2D.size.x/2, boxCol2D.size.y/2);

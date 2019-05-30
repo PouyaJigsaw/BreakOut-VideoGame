@@ -24,7 +24,7 @@ public class Block : MonoBehaviour
     virtual protected void  OnCollisionEnter2D(Collision2D collision)
     {
         Destroy(gameObject);
-        pointsAddedEvent.Invoke((int)blockValue);
+        pointsAddedEvent.Invoke(blockValue);
     }
 
 

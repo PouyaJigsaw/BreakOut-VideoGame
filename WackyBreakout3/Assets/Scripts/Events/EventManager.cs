@@ -72,7 +72,7 @@ public static class EventManager
 
 
     #region Points Added Event
-    static Block pointsAddedInvoker = new Block();
+    static Block pointsAddedInvoker;
     static List<UnityAction<float>> pointsAddedListenerList = new List<UnityAction<float>>();
     
     public static void  AddPointsAddedEventListener(UnityAction<float> listener)
