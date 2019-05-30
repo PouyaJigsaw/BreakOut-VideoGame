@@ -9,11 +9,25 @@ public class GameOverMenu : MonoBehaviour
     [SerializeField]
     Text highScoreText;
 
+    [SerializeField]
+    Text gameOverText;
     private void Start()
     {
      
         Time.timeScale = 0;
-        highScoreText.text = "Score: " + HUD.Score;
+
+        if (PlayerPrefs.HasKey("High Score"))
+        {
+            highScoreText.text = "High Score: " + PlayerPrefs.GetInt("High Score");
+        }
+        else
+        {
+            highScoreText.text = "No games played yet";
+        }
+       
+        EventManager.AddLastBlockDestroyedListener(YouWon);
+
+
     }
 
     public void HandleQuitButtonOnClickEvent()
@@ -24,5 +38,9 @@ public class GameOverMenu : MonoBehaviour
         MenuManager.GoToMenu(MenuName.Menu);
     }
 
+    public void YouWon()
+    {
+        gameOverText.text = "You Won!";
+    }
 
 }

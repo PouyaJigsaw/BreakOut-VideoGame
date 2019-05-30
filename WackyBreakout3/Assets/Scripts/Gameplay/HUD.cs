@@ -34,11 +34,28 @@ public class HUD : MonoBehaviour
 
     }
 
-   
-   
-    
-    // Start is called before the first frame update
-    void Start()
+
+    void SetHighScore()
+    {
+
+        int currentScore = (int)Score;
+        if (PlayerPrefs.HasKey("High Score"))
+        {
+            if (currentScore > PlayerPrefs.GetInt("High Score"))
+            {
+                PlayerPrefs.SetInt("High Score", currentScore);
+                PlayerPrefs.Save();
+            }
+        }
+        else
+        {
+            PlayerPrefs.SetInt("High Score", currentScore);
+            PlayerPrefs.Save();
+        }
+    }
+
+        // Start is called before the first frame update
+        void Start()
     {
         scoreText.text = "Score: " + score.ToString();
         ballsLeftText.text = "Balls Left: " + ballsLeft.ToString();
@@ -48,6 +65,7 @@ public class HUD : MonoBehaviour
         lastBallDestroyed = new LastBallDestroyedEvent();
         EventManager.AddLastBallInvoker(this);
         EventManager.AddLastBallListener(ShowGameOverMessage);
+        EventManager.AddLastBlockDestroyedListener(ShowGameOverMessage);
     }
 
     public static void UpdateBallsLeft()

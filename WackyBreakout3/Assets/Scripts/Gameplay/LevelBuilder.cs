@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 
 public class LevelBuilder : MonoBehaviour
 {
@@ -16,11 +17,17 @@ public class LevelBuilder : MonoBehaviour
     float blockHeight;
     BoxCollider2D blockCol2D;
 
+    public static int numOfBlocks;
+
+    
+
     // Start is called before the first frame update
     void Start()
     {
+        
         Instantiate(paddlePrefab, new Vector2(0, -1252), Quaternion.identity);
 
+        
         GameObject blockTemp = Instantiate(standardBlockPrefab, Vector3.zero, Quaternion.identity);
         blockCol2D = blockTemp.GetComponent<BoxCollider2D>();
         blockWidth = blockCol2D.size.x;
@@ -33,7 +40,7 @@ public class LevelBuilder : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+       
     }
 
 
@@ -75,7 +82,7 @@ public class LevelBuilder : MonoBehaviour
         float sBlockP = ConfigurationUtils.StandardBlockProbability;
         float bBlockP = sBlockP + ConfigurationUtils.BonusBlockProbability;
         float pBlockP = bBlockP + ConfigurationUtils.PickUpBlockProbability;
-
+        numOfBlocks++;
          double randomNum = Random.Range(0, 1.0000001f);
        
         if(randomNum <= sBlockP)
@@ -90,4 +97,6 @@ public class LevelBuilder : MonoBehaviour
         
     }
 
+
+    
 }

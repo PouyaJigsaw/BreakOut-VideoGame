@@ -13,10 +13,10 @@ public static class EventManager
     public static void AddFreezerInvoker(PickUpBlock invoker)
     {
         freezerInvokerList.Add(invoker);
-        if(freezerListener != null)
+        if (freezerListener != null)
         {
             invoker.AddFreezerEffectListener(freezerListener);
-            
+
 
         }
     }
@@ -24,7 +24,7 @@ public static class EventManager
     public static void AddFreezerListener(UnityAction<float> listener)
     {
         freezerListener = listener;
-        if(freezerInvokerList != null)
+        if (freezerInvokerList != null)
         {
             foreach (PickUpBlock freezerInvoker in freezerInvokerList)
             {
@@ -41,14 +41,14 @@ public static class EventManager
     # region Speed Up Event
 
     static List<PickUpBlock> speedUpInvokerList = new List<PickUpBlock>();
-    static List<UnityAction<float,float>> speedUpListenerList = new List<UnityAction<float,float>>();
+    static List<UnityAction<float, float>> speedUpListenerList = new List<UnityAction<float, float>>();
 
 
-    public static  void AddSpeedUpInvoker(PickUpBlock invoker)
+    public static void AddSpeedUpInvoker(PickUpBlock invoker)
     {
         speedUpInvokerList.Add(invoker);
-        
-        foreach(UnityAction<float,float> speedUpListener in speedUpListenerList)
+
+        foreach (UnityAction<float, float> speedUpListener in speedUpListenerList)
         {
             invoker.AddSpeedUpEffectListener(speedUpListener);
         }
@@ -56,11 +56,11 @@ public static class EventManager
     }
 
 
-    public static void AddSpeedUpListener(UnityAction<float,float> listener)
+    public static void AddSpeedUpListener(UnityAction<float, float> listener)
     {
         speedUpListenerList.Add(listener);
 
-        foreach(PickUpBlock speedInvoker in speedUpInvokerList)
+        foreach (PickUpBlock speedInvoker in speedUpInvokerList)
         {
             speedInvoker.AddSpeedUpEffectListener(listener);
         }
@@ -74,12 +74,12 @@ public static class EventManager
     #region Points Added Event
     static Block pointsAddedInvoker;
     static List<UnityAction<float>> pointsAddedListenerList = new List<UnityAction<float>>();
-    
-    public static void  AddPointsAddedEventListener(UnityAction<float> listener)
+
+    public static void AddPointsAddedEventListener(UnityAction<float> listener)
     {
         pointsAddedListenerList.Add(listener);
-        
-        if( pointsAddedInvoker != null)
+
+        if (pointsAddedInvoker != null)
         {
             pointsAddedInvoker.AddPointsAddedListener(listener);
         }
@@ -89,7 +89,7 @@ public static class EventManager
     {
         pointsAddedInvoker = invoker;
 
-        foreach(UnityAction<float> pointsAddedListener in pointsAddedListenerList)
+        foreach (UnityAction<float> pointsAddedListener in pointsAddedListenerList)
         {
             pointsAddedInvoker.AddPointsAddedListener(pointsAddedListener);
         }
@@ -116,7 +116,7 @@ public static class EventManager
     {
         updateBallsLeftListener = listener;
 
-        foreach(Ball updateBallsLeftInvoker in updateBallsLeftInvokerList)
+        foreach (Ball updateBallsLeftInvoker in updateBallsLeftInvokerList)
         {
             updateBallsLeftInvoker.AddUpdateBallsLeftListener(listener);
         }
@@ -136,8 +136,8 @@ public static class EventManager
     public static void AddBallDiesInvoker(Ball invoker)
     {
         ballDiesInvokerList.Add(invoker);
-        
-        if(ballDiesListener != null)
+
+        if (ballDiesListener != null)
         {
             invoker.AddUpdateBallsLeftListener(ballDiesListener);
         }
@@ -148,7 +148,7 @@ public static class EventManager
     {
         ballDiesListener = listener;
 
-        foreach(Ball ballDiesInvoker in ballDiesInvokerList)
+        foreach (Ball ballDiesInvoker in ballDiesInvokerList)
         {
             ballDiesInvoker.AddBallDiesListener(ballDiesListener);
         }
@@ -167,7 +167,7 @@ public static class EventManager
     {
         lastBallInvoker = invoker;
 
-        if(lastBallListener != null)
+        if (lastBallListener != null)
         {
             lastBallInvoker.AddLastBallEventListener(lastBallListener);
         }
@@ -178,11 +178,39 @@ public static class EventManager
     {
         lastBallListener = listener;
 
-        if(lastBallInvoker != null)
+        if (lastBallInvoker != null)
         {
             lastBallInvoker.AddLastBallEventListener(listener);
         }
     }
     #endregion
 
+
+    #region Last Block Destroyed Event
+
+    static List<Block> lastBlockInvokerList = new List<Block>();
+    static List<UnityAction> lastBlockListenerList = new List<UnityAction>();
+
+
+    public static void AddLastBlockDestroyedInvoker(Block invoker)
+    {
+        lastBlockInvokerList.Add(invoker);
+
+       foreach(UnityAction lastBlockListener in lastBlockListenerList)
+        {
+            invoker.AddLastBlockDestroyListener(lastBlockListener);
+        }
+    }
+
+    public static void AddLastBlockDestroyedListener(UnityAction listener)
+    {
+        lastBlockListenerList.Add(listener);
+
+        foreach(Block lastBlockInvoker in lastBlockInvokerList)
+        {
+            lastBlockInvoker.AddLastBlockDestroyListener(listener);
+        }
+    }
+    #endregion
 }
+
