@@ -68,7 +68,7 @@ public class HUD : MonoBehaviour
         EventManager.AddLastBlockDestroyedListener(ShowGameOverMessage);
     }
 
-    public static void UpdateBallsLeft()
+     void UpdateBallsLeft()
     {
         ballsLeft--;
         
@@ -92,6 +92,8 @@ public class HUD : MonoBehaviour
             AudioManager.Play(AudioClipName.GameOver);
             gameOver = true;
         }
+
+        SetHighScore();
 
     }
 
