@@ -9,7 +9,7 @@ public class PauseTheGame : MonoBehaviour
     void Update()
     {
      
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Escape))
         {            
                 MenuManager.GoToMenu(MenuName.Pause);               
         }
